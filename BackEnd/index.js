@@ -1,29 +1,12 @@
-require("dotenv").config();
-const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
-const { Pool } = require("pg");
+require('dotenv').config();
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
-});
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers/resolvers');
+const initDb = require('./models/initDb');
 
-// Define your GraphQL schema
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Define your GraphQL resolvers
-const resolvers = {
-  Query: {
-    hello: () => "Hello, world!",
-  },
-};
+// Remove the pool variable
 
 // Create an ApolloServer instance
 const server = new ApolloServer({ typeDefs, resolvers });
@@ -33,6 +16,7 @@ const app = express();
 
 // Wrap the server start and applyMiddleware calls within an async function
 (async () => {
+  await initDb();
   await server.start();
   server.applyMiddleware({ app });
 
