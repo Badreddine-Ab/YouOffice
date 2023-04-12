@@ -1,2 +1,19 @@
-# .gitignore
-.env
+# dependencies
+/node_modules
+
+# build output
+/build
+
+# logs
+/logs
+*.log
+
+# dotenv environment variables file
+/.env
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# Mac OS specific files
+.DS_Store
