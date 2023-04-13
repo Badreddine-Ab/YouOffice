@@ -8,6 +8,16 @@ const adminRoute = require("./routes/adminRoute");
 const doctorRoute = require("./routes/doctorsRoute");
 const path = require("path");
 
+// Import morgan and fs
+const morgan = require("morgan");
+const fs = require("fs");
+
+// Create a writable stream for logs
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" });
+
+// Setup morgan middleware to log requests to access.log file
+app.use(morgan("combined", { stream: accessLogStream }));
+
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/doctor", doctorRoute);
