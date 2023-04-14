@@ -68,6 +68,11 @@ label{
   box-shadow: 0 0 2px rgb(189, 188, 188);
   border-radius: 0 !important;
 }
+
+.doctor-card {
+  margin-bottom: 20px;
+}
+
 .primary-button{
   background-color: #005555 !important;
   border-color: #005555 !important;
@@ -125,6 +130,3 @@ p{
   border-bottom-left-radius: 10px;
 }
 
-.doctor-card {
-  margin-bottom: 20px;
-}
